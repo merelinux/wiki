@@ -27,3 +27,4 @@ enableRobotsTXT = true
 
 [params]
    geekdocLogo = "seedling_1f331.png"
+   geekdocRepo = "https://github.com/merelinux/wiki"
