@@ -13,6 +13,6 @@ management, [busybox](https://busybox.net) for a suite of core utilities, and
 [llvm+clang](https://llvm.org) as the main C compiler and toolchain.
 
 Mere is under active development and is currently missing many features of a
-a typical Linux distribution. It is however, steadily progressing. You can
+typical Linux distribution. It is however, steadily progressing. You can
 monitor and contribute to its progress at
 [https://github.com/jhuntwork/merelinux](https://github.com/jhuntwork/merelinux).
