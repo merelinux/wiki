@@ -1,7 +1,6 @@
 baseURL = "https://merelinux.org"
 languageCode = 'en-us'
-title = "Mere Linux"
-theme = "hugo-geekdoc"
+title = "🌱 Mere Linux"
 
 pluralizeListTitles = false
 
@@ -25,7 +24,9 @@ enableRobotsTXT = true
 [taxonomies]
    tag = "tags"
 
+[module]
+  [[module.imports]]
+    path = 'github.com/adityatelange/hugo-PaperMod'
+
 [params]
-   geekdocLogo = "seedling_1f331.png"
-   geekdocRepo = "https://github.com/merelinux/wiki"
-   geekdocEditPath = "edit/main/"
+  ShowPostNavLinks = true

@@ -8,7 +8,7 @@ Mere Linux is a lightweight Linux distribution built around
 [s6](https://skarnet.org/software/s6/) for system initialization and process
 supervision.
 
-It also currently uses [pacman](https://www.archlinux.org/pacman/) for package
+It also uses [mere](https://codeberg.org/merelinux/mere/) for package
 management, [busybox](https://busybox.net) for a suite of core utilities, and
 [llvm+clang](https://llvm.org) as the main C compiler and toolchain.
 
