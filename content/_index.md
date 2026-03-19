@@ -1,6 +1,5 @@
 ---
-title: Welcome!
-geekdocBreadcrumb: false
+title: Mere Linux
 ---
 
 Mere Linux is a lightweight Linux distribution built around
@@ -8,11 +7,18 @@ Mere Linux is a lightweight Linux distribution built around
 [s6](https://skarnet.org/software/s6/) for system initialization and process
 supervision.
 
-It also uses [mere](https://codeberg.org/merelinux/mere/) for package
-management, [busybox](https://busybox.net) for a suite of core utilities, and
-[llvm+clang](https://llvm.org) as the main C compiler and toolchain.
+The goal is a minimal, understandable system where packages are immutable,
+upgrades are atomic, and multiple versions coexist cleanly — using plain
+directories, symlinks, and user namespaces rather than heavy abstractions.
 
-Mere is under active development and is currently missing many features of a
-typical Linux distribution. It is however, steadily progressing. You can
-monitor and contribute to its progress at
-[https://github.com/jhuntwork/merelinux](https://github.com/jhuntwork/merelinux).
+Mere uses its own [package manager](https://codeberg.org/merelinux/mere/)
+written in Zig, [busybox](https://busybox.net) for core utilities, and
+[llvm+clang](https://llvm.org) as the toolchain.
+
+New to Mere? Take the [Tour of Mere](/tour/) to learn how the package manager
+works.
+
+Mere is under active development — the toolchain is solid but the package
+manager is new, and we're still growing the package repository, docs, and
+tooling. Here be dragons. You can follow along and contribute at
+[github.com/jhuntwork/merelinux](https://github.com/jhuntwork/merelinux).
