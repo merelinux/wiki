@@ -4,8 +4,6 @@ title = "🌱 Mere Linux"
 
 pluralizeListTitles = false
 
-pygmentsCodeFences = true
-
 enableRobotsTXT = true
 
 [[menu.main]]
@@ -14,6 +12,11 @@ enableRobotsTXT = true
   weight = 10
 
 [markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = false
+    noClasses = false
   [markup.goldmark.renderer]
     unsafe = true
   [markup.tableOfContents]
@@ -29,3 +32,5 @@ enableRobotsTXT = true
 
 [params]
   ShowPostNavLinks = true
+  [params.assets]
+    disableHLJS = true
