@@ -1,0 +1,24 @@
+:root {
+    --link-color: #2e7d32;
+    --code-inline-bg: rgba(46, 125, 50, 0.08);
+    --code-inline-color: #2e7d32;
+}
+
+[data-theme="dark"] {
+    --link-color: #81c784;
+    --code-inline-bg: rgba(129, 199, 132, 0.12);
+    --code-inline-color: #81c784;
+}
+
+a {
+    color: var(--link-color);
+}
+
+.post-content a:hover {
+    text-decoration: underline;
+}
+
+.post-content code:not(pre code) {
+    background: var(--code-inline-bg);
+    color: var(--code-inline-color);
+}
