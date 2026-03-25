@@ -21,4 +21,4 @@ works.
 Mere is under active development — the toolchain is solid but the package
 manager is new, and we're still growing the package repository, docs, and
 tooling. Here be dragons. You can follow along and contribute at
-[github.com/jhuntwork/merelinux](https://github.com/jhuntwork/merelinux).
+[codeberg.org/merelinux/recipes](https://codeberg.org/merelinux/recipes).
