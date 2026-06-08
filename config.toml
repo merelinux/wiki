@@ -70,3 +70,7 @@ tooling. Here be dragons. You can follow along and contribute at
 [[params.socialIcons]]
   name = "codeberg"
   url = "https://codeberg.org/merelinux"
+
+[[params.socialIcons]]
+  name = "discord"
+  url = "https://discord.gg/Vs7QgdF9"
