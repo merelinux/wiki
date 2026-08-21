@@ -48,7 +48,7 @@ upgrades are atomic, and multiple versions coexist cleanly — using plain
 directories, symlinks, and user namespaces rather than heavy abstractions.
 <br>
 <br>
-Mere uses its own [package manager](https://codeberg.org/merelinux/mere/)
+Mere uses its own [package manager](https://github.com/jhuntwork/mere/)
 written in Zig, [busybox](https://busybox.net) for core utilities, and
 [llvm+clang](https://llvm.org) as the toolchain.
 <br>
@@ -60,7 +60,7 @@ works.
 Mere is under active development — the toolchain is solid but the package
 manager is new, and we're still growing the package repository, docs, and
 tooling. Here be dragons. You can follow along and contribute at
-[codeberg.org/merelinux/recipes](https://codeberg.org/merelinux/recipes).
+[github.com/jhuntwork/merelinux](https://github.com/jhuntwork/merelinux).
 """
 
 [[params.socialIcons]]
@@ -68,8 +68,8 @@ tooling. Here be dragons. You can follow along and contribute at
   url = "/posts/index.xml"
 
 [[params.socialIcons]]
-  name = "codeberg"
-  url = "https://codeberg.org/merelinux"
+  name = "github"
+  url = "https://github.com/jhuntwork/merelinux"
 
 [[params.socialIcons]]
   name = "discord"
