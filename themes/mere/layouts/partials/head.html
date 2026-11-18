@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="{{ site.Language.Lang }}" data-theme="dark"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ if .IsHome }}Mere Linux{{ else }}{{ .Title }} · Mere Linux{{ end }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ with .Summary }}{{ . | plainify | truncate 155 }}{{ else }}An independent musl-based Linux distribution.{{ end }}{{ end }}">
+{{ with .OutputFormats.Get "RSS" }}<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="Mere Linux">{{ end }}
+{{ $css := resources.Get "css/main.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+</head><body>

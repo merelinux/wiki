@@ -1,0 +1,4 @@
+name = "Mere Editorial"
+license = "MIT"
+description = "Custom editorial Hugo theme for Mere Linux"
+min_version = "0.120.0"

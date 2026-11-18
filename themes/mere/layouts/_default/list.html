@@ -1,0 +1,6 @@
+{{ define "main" }}
+<main class="page-shell"><header class="page-header"><div class="page-kicker">Mere Linux / Index</div><h1>{{ .Title }}</h1></header>
+{{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+<div class="post-index">{{ range .Pages.ByDate.Reverse }}<a href="{{ .RelPermalink }}"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006 / 01 / 02" }}</time><div><h2>{{ .Title }}</h2><p>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 150 }}{{ end }}</p></div><span class="post-arrow" aria-hidden="true">↗</span></a>{{ end }}</div>
+</main>
+{{ end }}

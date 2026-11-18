@@ -1,0 +1,63 @@
+{{ define "main" }}
+<main id="home">
+<div class="container"><div class="topnote"><span>Independent Linux distribution <b> / </b> Built from the ground up</span><span>Open source <b>·</b> Work in progress</span></div>
+<section aria-labelledby="hero-heading" class="hero"><div>
+<div class="kicker">Mere Linux / An introduction</div>
+<h1 id="hero-heading">An independent<br/><span class="serif">Linux distribution.</span></h1>
+<p class="lede">Mere is a musl-based Linux distribution built around its own package manager, written in Zig. Packages are stored independently, system changes are applied atomically, and the underlying mechanisms remain relatively straightforward.</p>
+<div class="hero-links"><a href="{{ "tour/" | relURL }}">Start with the tour ↗</a><a href="https://github.com/jhuntwork/mere">Read the source ↗</a></div>
+</div><aside class="hero-aside"><div class="kicker">The foundation</div><p class="aside-title">Some of the tools and components in use</p><p>Mere uses familiar Unix facilities such as directories, symlinks, and user namespaces. The package manager builds on these rather than introducing a separate filesystem model.</p><div class="smallcode"><span class="warm">/</span> musl libc<br/><span class="warm">/</span> dinit<br/><span class="warm">/</span> Zig<br/><span class="warm">/</span> LLVM / Clang</div></aside></section></div>
+<section class="section" id="architecture"><div class="container"><div class="section-meta"><div class="index">01 / The mechanism</div><div><h2 class="section-title">How packages are organized</h2><p class="section-intro">The package manager stores packages as immutable objects and builds system profiles from them. A new system generation can be selected without modifying the packages already in the store.</p></div></div>
+<div aria-label="Interactive package management architecture" class="arch" role="region"><div class="arch-head"><span>mere / system model</span><span class="status">Choose a stage below</span></div><div class="arch-main"><div class="arch-visual"><div aria-label="Package process steps" class="flowline" role="group"><button aria-pressed="true" class="node active" data-stage="store" type="button"><span class="node-no">01 / INPUT</span><strong>Store</strong><small>Immutable artifacts</small></button><span aria-hidden="true" class="arrow">→</span><button aria-pressed="false" class="node" data-stage="profile" type="button"><span class="node-no">02 / COMPOSE</span><strong>Profiles</strong><small>Linked system views</small></button><span aria-hidden="true" class="arrow">→</span><button aria-pressed="false" class="node" data-stage="activate" type="button"><span class="node-no">03 / SWITCH</span><strong>Activate</strong><small>Generation pointer</small></button></div><div class="diagram-note">Select a stage to see how the store, profiles, and activation relate.</div></div><div aria-live="polite" class="arch-details"><div><div class="details-label" id="stage-label">STAGE 01 / STORE</div><h3 id="stage-title">Packages in the store</h3><p id="stage-body">Each package is placed in a content-addressed directory. Its files are not changed in place, so different versions can coexist.</p></div><div class="sample" id="stage-code">/mere/store/<br/>├── hash-a…-musl/<br/>└── hash-b…-dinit/</div></div></div><div class="arch-foot">Explore the actual implementation in <a href="https://github.com/jhuntwork/mere">jhuntwork/mere ↗</a></div></div>
+</div></section>
+<section class="section" id="building">
+<div class="container">
+<div class="section-meta">
+<div class="index">02 / The build system</div>
+<div>
+<h2 class="section-title">Building packages with Mere</h2>
+<p class="section-intro">A recipe describes the source, the tools required, and what to produce. Mere assembles those tools into a temporary profile, then runs the build in a separate Linux namespace.</p>
+<div aria-label="Interactive recipe and build-environment explorer" class="build-explorer">
+<div class="build-head mono"><span><span class="build-dot"></span> from recipe to artifact</span><span>example: dinit / recipe.kdl</span></div>
+<div class="build-columns">
+<div class="recipe-pane">
+<div class="pane-heading"><span>01 / RECIPE</span><a href="https://github.com/jhuntwork/merelinux/blob/main/recipes/core/dinit/recipe.kdl" rel="noopener" target="_blank">View complete recipe ↗</a></div>
+<p class="pane-help">Select a part of the recipe to explore its role in the build.</p>
+<div aria-label="Selected excerpt from dinit KDL recipe" class="recipe-code mono" role="group">
+<button aria-pressed="true" class="code-fragment selected" data-build="metadata" type="button"><span class="line-no">01<br/>02<br/>03<br/>04<br/>05<br/>06</span><span class="code-lines"><span class="syntax-node">recipe</span> {<br/> <span class="syntax-key">name</span> <span class="syntax-string">"dinit"</span><br/> <span class="syntax-key">version</span> <span class="syntax-string">"0.22.1"</span><br/> <span class="syntax-key">release</span> <span class="syntax-number">1</span><br/> <span class="syntax-key">depends</span> <span class="syntax-string">"llvm" "make" "musl-dev"</span><br/>}</span></button>
+<button aria-pressed="false" class="code-fragment" data-build="source" type="button"><span class="line-no">07<br/>08<br/>09</span><span class="code-lines"><span class="syntax-node">source</span> <span class="syntax-string">"https://…/dinit-${recipe.version}.tar.xz"</span> {<br/> <span class="syntax-key">blake3</span> <span class="syntax-string">"865ba8b7…"</span><br/>}</span></button>
+<button aria-pressed="false" class="code-fragment" data-build="build" type="button"><span class="line-no">10<br/>11<br/>12<br/>13<br/>14<br/>15</span><span class="code-lines"><span class="syntax-node">build</span> {<br/> <span class="syntax-key">script</span> <span class="syntax-string">r#"</span><br/>        ./configure …<br/>        make<br/> <span class="syntax-string">"#</span><br/>}</span></button>
+<button aria-pressed="false" class="code-fragment" data-build="package" type="button"><span class="line-no">16<br/>17<br/>18</span><span class="code-lines"><span class="syntax-node">package</span> <span class="syntax-string">"dinit"</span> {<br/> <span class="syntax-key">files</span> <span class="syntax-string">"sbin/" "bin/" "usr/share/man/"</span><br/>}</span></button>
+</div>
+<p class="excerpt-note">An abbreviated excerpt from Mere Linux's dinit recipe. Dependencies, source URL, and build commands have been shortened for display.</p>
+</div>
+<div class="build-pane">
+<div class="pane-heading"><span>02 / EXECUTION</span><span>LINUX / USER + MOUNT + PID NAMESPACES</span></div>
+<div class="build-map">
+<div class="map-top" data-visual="metadata"><span class="map-small">RESOLVED DEPENDENCIES</span><strong>Temporary build profile</strong><small>Symlinks into /mere/store</small></div>
+<div class="map-connector">↓</div>
+<div class="map-boundary" data-visual="build"><div class="boundary-label">SYNTHETIC ROOT <span>namespace + chroot</span></div><div class="map-mounts"><div data-visual="metadata"><span>/usr</span><small>Profile tools<br/>read-only</small></div><div data-visual="source"><span>/mere</span><small>Package store<br/>read-only</small></div><div data-visual="build"><span>/work</span><small>Build workspace<br/>writable</small></div></div><div class="phase-row mono">prepare <b>→</b> build <b>→</b> check <b>→</b> install</div></div>
+<div class="map-connector">↓</div>
+<div class="map-output" data-visual="package"><span>OUTPUT</span><strong>Package artifacts</strong><small>Files selected from staging</small></div>
+</div>
+<div aria-live="polite" class="build-caption"><div class="build-caption-label mono" id="build-caption-label">RECIPE / DEPENDENCIES</div><h3 id="build-caption-title">Only the requested tools</h3><p id="build-caption-body">Mere resolves build dependencies and creates a temporary profile from packages already in its store. It becomes the toolchain visible inside the build environment.</p></div>
+</div>
+</div>
+<div class="build-foot"><span>Workspace, logs, and build-report.kdl remain available for inspection.</span><a href="https://github.com/jhuntwork/mere/blob/main/docs/design/recipe_spec.md" rel="noopener" target="_blank">Recipe specification ↗</a></div>
+</div>
+<div class="build-context"><p><span class="tiny-mark">↳</span> The profile supplies dependencies. Linux namespaces and the mount layout provide isolation. A writable <code>/work</code> holds sources, intermediate files, and staged output.</p><a href="https://github.com/jhuntwork/mere/blob/main/docs/design/specification-details.md">Build environment details ↗</a></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section" id="approach"><div class="container"><div class="section-meta"><div class="index">03 / Design choices</div><div><h2 class="section-title">Design choices</h2><p class="section-intro">A few choices shape the package manager and the distribution. Each has benefits and costs, and the implementation continues to change as Mere develops.</p><div class="principles"><article class="principle"><div class="n">01 / IMMUTABILITY</div><h3>Independent package storage</h3><p>Packages are stored in separate locations. Different versions can coexist without replacing one another.</p><a href="{{ "tour/" | relURL }}">Learn more ↗</a></article><article class="principle"><div class="n">02 / ATOMICITY</div><h3>System generations</h3><p>Profiles provide system generations that can be activated without rewriting the packages they reference.</p><a href="{{ "tour/" | relURL }}">Learn more ↗</a></article><article class="principle"><div class="n">03 / LEGIBILITY</div><h3>Familiar mechanisms</h3><p>Recipes use KDL, and package installation relies on directories, symlinks, and Linux namespaces.</p><a href="{{ "tour/" | relURL }}">Learn more ↗</a></article></div></div></div></div></section>
+<section class="section" id="notes"><div class="container"><div class="section-meta"><div class="index">04 / Field notes</div><div><div class="journal-head"><h2 class="section-title">Development notes</h2><a href="{{ "posts/" | relURL }}">All writing ↗</a></div><p class="section-intro">Articles about implementation decisions, ongoing work, and lessons learned while building Mere.</p><div class="articles">{{ range first 3 (where site.RegularPages "Section" "posts").ByDate.Reverse }}
+<a class="article" href="{{ .RelPermalink }}">
+<time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006 / 01 / 02" }}</time>
+<div><h3>{{ .Title }}</h3><p>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 115 }}{{ end }}</p></div>
+<span aria-hidden="true" class="goto">↗</span>
+</a>
+{{ end }}</div></div></div></div></section>
+<div class="container"><section class="closing"><div class="index">05 / Get involved</div><div class="closing-copy"><div><h2>Following development</h2><p>Mere is under active development. Source code, package recipes, and discussion are available to anyone interested in following or contributing.</p></div><a href="{{ with site.Params.mereDiscordURL }}{{ . | safeURL }}{{ else }}https://discord.gg/t2xeTVdutx{{ end }}">Join the Discord ↗</a></div></section></div>
+</main>
+{{ end }}

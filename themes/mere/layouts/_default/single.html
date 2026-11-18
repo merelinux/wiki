@@ -1,0 +1,7 @@
+{{ define "main" }}
+<main class="page-shell"><article>
+<header class="page-header"><div class="page-kicker">{{ if .Section }}{{ .Section }}{{ else }}Mere Linux{{ end }}</div><h1>{{ .Title }}</h1>{{ if eq .Section "posts" }}<div class="page-date">{{ .Date.Format "January 2, 2006" }}</div>{{ end }}</header>
+<div class="prose">{{ .Content }}</div>
+{{ if eq .Section "posts" }}<nav class="page-pagination">{{ with .PrevInSection }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}{{ with .NextInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}</nav>{{ end }}
+</article></main>
+{{ end }}
